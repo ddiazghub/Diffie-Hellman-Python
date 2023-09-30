@@ -1,31 +1,8 @@
 import secrets
 
 
-def gcd(a: int, b: int) -> int:
-    if a < b:
-        a, b = b, a
-
-    while b != 0:
-        temp = a % b
-        a, b = b, temp
-
-    return a
-
-
-def gcde(r1: int, r2: int) -> tuple[int, int, int]:
-    # if r1 < r2:
-    #     r1, r2 = r2, r1
-
-    s1, t1 = 1, 0
-    s2, t2 = 0, 1
-
-    while r2 != 0:
-        q = r1 // r2
-        s1, s2 = s2, s1 - q * s2
-        t1, t2 = t2, t1 - q * t2
-        r1, r2 = r2, r1 - q * r2
-
-    return r1, s1, t1
+def mod_mult(a: int, b: int, mod: int) -> int:
+    return (a * b) % mod
 
 
 def mod_exp(n: int, pow: int, mod: int) -> int:
@@ -39,10 +16,10 @@ def mod_exp(n: int, pow: int, mod: int) -> int:
 
     while pow > 0:
         if (pow & 1) == 1:
-            result = (result * n) % mod
+            result = mod_mult(result, n, mod)
 
         pow >>= 1
-        n = (n * n) % mod
+        n = mod_mult(n, n, mod)
 
     return result
 
@@ -114,3 +91,11 @@ def randbits(length: int) -> int:
     rand = abs(secrets.randbits(length + 1))
 
     return rand & ((1 << length) - 1)
+
+
+def gen_prime(degree: int, exclude: set[int] = set()) -> int:
+    while True:
+        n = secrets.randbelow(degree)
+
+        if n > 1 and n not in exclude and is_prime(n) :
+            return n
