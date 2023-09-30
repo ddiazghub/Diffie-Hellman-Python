@@ -1,6 +1,19 @@
 import secrets
 
 
+def gcde(r1: int, r2: int) -> tuple[int, int, int]:
+    s1, t1 = 1, 0
+    s2, t2 = 0, 1
+
+    while r2 != 0:
+        q = r1 // r2
+        s1, s2 = s2, s1 - q * s2
+        t1, t2 = t2, t1 - q * t2
+        r1, r2 = r2, r1 - q * r2
+
+    return r1, s1, t1
+
+
 def mod_mult(a: int, b: int, mod: int) -> int:
     return (a * b) % mod
 

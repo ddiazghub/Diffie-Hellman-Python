@@ -1,4 +1,57 @@
-from ops import mod_exp, randbits
+from ops import mod_exp, randbits, gcde
+
+
+def test_gcde():
+    assert gcde(30, 20) == (10, 1, -1)
+    assert gcde(35, 15) == (5, 1, -2)
+
+    # Test case 1: GCD of two prime numbers
+    a, b = 17, 19
+    gcd, x, y = gcde(a, b)
+    assert gcd == 1
+    assert a * x + b * y == gcd
+
+    # Test case 2: GCD of two identical numbers
+    a, b = 8, 8
+    gcd, x, y = gcde(a, b)
+    assert gcd == 8
+    assert a * x + b * y == gcd
+
+    # Test case 3: GCD of two consecutive numbers
+    a, b = 12, 13
+    gcd, x, y = gcde(a, b)
+    assert gcd == 1
+    assert a * x + b * y == gcd
+
+    # Test case 4: GCD of two numbers with a common divisor
+    a, b = 36, 48
+    gcd, x, y = gcde(a, b)
+    assert gcd == 12
+    assert a * x + b * y == gcd
+
+    # Test case 5: GCD of two numbers with no common divisor other than 1
+    a, b = 25, 49
+    gcd, x, y = gcde(a, b)
+    assert gcd == 1
+    assert a * x + b * y == gcd
+
+    # Test case 6: GCD of two large numbers
+    a, b = 12345, 67890
+    gcd, x, y = gcde(a, b)
+    assert gcd == 15
+    assert a * x + b * y == gcd
+
+    # Test case 7: GCD of two large prime numbers
+    a, b = 999999937, 999999929
+    gcd, x, y = gcde(a, b)
+    assert gcd == 1
+    assert a * x + b * y == gcd
+
+    # Test case 8: GCD of two large numbers with a common divisor
+    a, b = 987654321, 123456789
+    gcd, x, y = gcde(a, b)
+    assert gcd == 9
+    assert a * x + b * y == gcd
 
 
 def test_mod_exp():
