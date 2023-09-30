@@ -17,6 +17,7 @@ def test_exhaustive_search():
     attack_test(6, 13, 5, 4, exhaustive_search)
     attack_test(11, 97, 17, 29, exhaustive_search)
 
+
 def test_baby_step_giant_step():
     attack_test(3, 113, 100, 13, baby_step_giant_step)
     attack_test(3, 17, 15, 13, baby_step_giant_step)
