@@ -14,6 +14,13 @@ def gcde(r1: int, r2: int) -> tuple[int, int, int]:
     return r1, s1, t1
 
 
+def mod_inv(x: int, mod: int) -> int:
+    gcd, inv, _ = gcde(x, mod)
+    assert gcd == 1
+
+    return inv
+
+
 def mod_mult(a: int, b: int, mod: int) -> int:
     return (a * b) % mod
 

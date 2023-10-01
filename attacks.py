@@ -1,4 +1,4 @@
-from ops import gcde, mod_exp, mod_mult
+from ops import gcde, mod_exp, mod_inv, mod_mult
 
 import math
 
@@ -24,11 +24,7 @@ def baby_step_giant_step(generator: int, mod: int, target: int) -> int:
         table[value] = j
         value = mod_mult(value, generator, mod)
 
-    gcd, gen_inv, _ = gcde(generator, mod)
-
-    assert gcd == 1
-    assert mod_mult(generator, gen_inv, mod) == 1
-
+    gen_inv = mod_inv(generator, mod)
     beta = mod_exp(gen_inv, max, mod)
     value = target
 

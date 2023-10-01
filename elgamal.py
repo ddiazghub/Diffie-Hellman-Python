@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ops import gcde, gen_prime, mod_exp, mod_mult
+from ops import gcde, gen_prime, mod_exp, mod_inv, mod_mult
 
 
 @dataclass(frozen=True)
@@ -30,9 +30,7 @@ class ElGamal:
 
     def decrypt(self, v: int, ciphertext: int) -> int:
         coef = mod_exp(v, self.keys.private, self.mod)
-        gcd, coef_inv, _ = gcde(coef, self.mod)
-        assert gcd == 1
-        message = mod_mult(ciphertext, coef_inv, self.mod)
+        message = mod_mult(ciphertext, mod_inv(coef, self.mod), self.mod)
 
         return message
 
