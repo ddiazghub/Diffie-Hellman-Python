@@ -1,5 +1,4 @@
 from elgamal import ElGamal, ElGamalP256
-from elliptic_curve import P256
 from ops import mod_exp
 
 def test_elgamal():

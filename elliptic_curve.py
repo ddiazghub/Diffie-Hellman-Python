@@ -139,7 +139,7 @@ class P256(EllipticCurve):
     ) -> tuple[Point, Point, Point]:
         if coef1 < 2 or coef2 < 2:
             coef1 = gen_prime(P256.Q)
-            coef2 = gen_prime(P256.Q)
+            coef2 = gen_prime(P256.Q, exclude={coef1})
 
         u = self.generator * coef1
         v = self.generator * coef2
