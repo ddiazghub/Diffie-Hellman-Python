@@ -1,7 +1,10 @@
+from elliptic_curve import P256, Point
 from ops import gen_prime, mod_exp
 
 
-def diffie_hellman(generator: int, mod: int, exp1: int = -1, exp2: int = -1) -> tuple[int, int, int]:
+def diffie_hellman(
+    generator: int, mod: int, exp1: int = -1, exp2: int = -1
+) -> tuple[int, int, int]:
     if exp1 < 2 or exp2 < 2:
         exp1 = gen_prime(mod, {generator})
         exp2 = gen_prime(mod, {generator, exp1})
@@ -14,3 +17,6 @@ def diffie_hellman(generator: int, mod: int, exp1: int = -1, exp2: int = -1) -> 
 
     return u, v, shared_secret
 
+
+def diffie_hellman_p256(coef1: int = -1, coef2: int = -1) -> tuple[Point, Point, Point]:
+    return P256().diffie_hellman(coef1, coef2)

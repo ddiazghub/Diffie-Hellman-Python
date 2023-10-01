@@ -117,5 +117,5 @@ def gen_prime(degree: int, exclude: set[int] = set()) -> int:
     while True:
         n = secrets.randbelow(degree)
 
-        if n > 1 and n not in exclude and is_prime(n) :
+        if n > 1 and n not in exclude and is_prime(n):
             return n

@@ -1,4 +1,4 @@
-from ops import gcde, mod_exp, mod_inv, mod_mult
+from ops import mod_exp, mod_inv, mod_mult
 
 import math
 

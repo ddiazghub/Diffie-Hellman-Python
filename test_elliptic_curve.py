@@ -1,4 +1,4 @@
-from elliptic_curves import EllipticCurve, Point
+from elliptic_curve import EllipticCurve, Point
 
 
 def test_addition():
@@ -64,5 +64,7 @@ def test_multiplication():
         (5, 8),
     ]
 
-    for i, point in enumerate(expected):
-        assert curve.ith_point(i).tuple() == point
+    for i, p in enumerate(expected):
+        point = curve.ith_point(i)
+        assert point.tuple() == p
+        assert point in curve
