@@ -120,11 +120,9 @@ class Point:
 class P256(EllipticCurve):
     A = 3
     B = 41058363725152142129326129780047268409114441015993725554835256314039467401291
-    MOD: int = (2**256) - (2**224) + (2**192) + (2**96) - 1
-
-    Q: int = (
-        (2**256) - (2**224) + (2**192) - 89188191075325690597107910205041859247
-    )
+    DUNNO = (1 << 256) - (1 << 224) + (1 << 192)
+    MOD = DUNNO + (1 << 96) - 1
+    Q = DUNNO - 89188191075325690597107910205041859247
 
     GEN = (
         48439561293906451759052585252797914202762949526041747995844080717082404635286,
@@ -134,9 +132,7 @@ class P256(EllipticCurve):
     def __init__(self) -> None:
         super().__init__(P256.A, P256.B, P256.MOD, P256.GEN)
 
-    def diffie_hellman(
-        self, coef1: int = -1, coef2: int = -1
-    ) -> tuple[Point, Point, Point]:
+    def diffie_hellman(self, coef1: int = -1, coef2: int = -1) -> tuple[Point, Point, Point]:
         if coef1 < 2 or coef2 < 2:
             coef1 = gen_prime(P256.Q)
             coef2 = gen_prime(P256.Q, exclude={coef1})
